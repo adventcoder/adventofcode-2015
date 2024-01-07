@@ -1,31 +1,23 @@
 from dataclasses import dataclass
-from functools import reduce
-import operator
 import re
 
 def get_input(day):
     with open(f'inputs/day{day}.txt', 'r') as file:
         return file.read()
 
-def union(*args):
-    return reduce(operator.or_, *args)
-
-def intersection(*args):
-    return reduce(operator.and_, *args)
+def ints(s):
+    return map(int, re.findall(r'-?[0-9]+', s))
 
 def iterate(f, x):
     while True:
         yield x
         x = f(x)
 
-def slices(s, n, overlap=False, truncate=False):
+def slices(s, n, overlap=False, truncate=True):
     step = 1 if overlap else n
-    stop = len(s) if truncate else len(s) - n + 1
+    stop = len(s) - n + 1 if truncate else len(s)
     for i in range(0, stop, step):
         yield s[i : i + n]
-
-def ints(s):
-    return map(int, re.findall(r'-?[0-9]+', s))
 
 @dataclass(frozen=True)
 class Interval:
