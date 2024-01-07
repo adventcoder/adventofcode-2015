@@ -1,9 +1,5 @@
-from utils import get_input
+from utils import get_input, ints
 import json
-import re
-
-s = get_input(12)
-print('1.', sum(map(int, re.findall(r'-?[0-9]+', s))))
 
 def total(obj):
     if type(obj) == dict:
@@ -15,4 +11,6 @@ def total(obj):
     else:
         return 0
 
+s = get_input(12)
+print('1.', sum(ints(s)))
 print('2.', total(json.loads(s)))

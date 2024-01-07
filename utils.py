@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from functools import reduce
 import operator
+import re
 
 def get_input(day):
     with open(f'inputs/day{day}.txt', 'r') as file:
@@ -22,6 +23,9 @@ def slices(s, n, overlap=False, truncate=False):
     stop = len(s) if truncate else len(s) - n + 1
     for i in range(0, stop, step):
         yield s[i : i + n]
+
+def ints(s):
+    return map(int, re.findall(r'-?[0-9]+', s))
 
 @dataclass(frozen=True)
 class Interval:
