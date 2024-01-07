@@ -11,9 +11,9 @@ def split(seq):
     #
     # Ultimately this is a result of the following cycle (which never starts with a 2):
     # 
-    # 12[^2] -> 1112
-    # 13[^3] -> 1113
-    # 111[^1] -> 31
+    # 12[^2] -> 111
+    # 13[^3] -> 111
+    # 111 -> 31
     # 31 -> 131
     # 32[^2] -> 131
     # 322[^2] -> 132
@@ -22,7 +22,7 @@ def split(seq):
     #
     # 22 -> 22 (provided that the sequence following doesn't interact with it, as above)
     #
-    split_pattern = r'12[^2]|13[^3]|111[^1]|31|32[^2]|322[^2]'
+    split_pattern = r'12[^2]|13[^3]|111|31|32[^2]|322[^2]'
     chunks = []
     start = 0
     for i in range(1, len(seq)-2):
