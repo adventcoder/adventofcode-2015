@@ -18,7 +18,7 @@ target = parse_props('children: 3, cats: 7, samoyeds: 2, pomeranians: 3, akitas:
 
 sues = []
 for line in get_input(16).splitlines():
-    lval, rval = line.split(';', 1)
+    lval, rval = line.split(':', 1)
     num = int(lval.split()[-1])
     sues.append((num, parse_props(rval)))
 
