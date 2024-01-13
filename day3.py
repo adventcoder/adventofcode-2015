@@ -3,7 +3,7 @@ from utils import get_input
 steps = get_input(3)
 step_map = { '>': 1, 'v': 1j, '<': -1, '^': -1j }
 
-def trace(steps):
+def visit(steps):
     seen = set()
     pos = 0
     seen.add(pos)
@@ -12,5 +12,5 @@ def trace(steps):
         seen.add(pos)
     return seen
 
-print('1.', len(trace(steps)))
-print('2.', len(trace(steps[0::2]) | trace(steps[1::2])))
+print('1.', len(visit(steps)))
+print('2.', len(visit(steps[0::2]) | visit(steps[1::2])))
