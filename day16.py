@@ -1,26 +1,18 @@
-from utils import get_input
+from utils import get_input, tabulate
 
-def parse_props(s):
-    props = {}
-    for chunk in s.split(','):
-        lval, rval = chunk.split(':', 1)
-        props[lval.strip()] = int(rval)
-    return props
+def parse_sue(s):
+    return { lval.strip(): int(rval) for lval, rval in tabulate(s, ':', ',', maxsplit=1) }
 
-def matches(props, target, k):
+def matches(sue, target, k):
     if k in ('cats', 'trees'):
-        return props[k] > target[k]
+        return sue[k] > target[k]
     if k in ('pomeranians', 'goldfish'):
-        return props[k] < target[k]
-    return props[k] == target[k]
+        return sue[k] < target[k]
+    return sue[k] == target[k]
 
-target = parse_props('children: 3, cats: 7, samoyeds: 2, pomeranians: 3, akitas: 0, vizslas: 0, goldfish: 5, trees: 3, cars: 2, perfumes: 1')
+target = parse_sue('children: 3, cats: 7, samoyeds: 2, pomeranians: 3, akitas: 0, vizslas: 0, goldfish: 5, trees: 3, cars: 2, perfumes: 1')
 
-sues = []
-for line in get_input(16).splitlines():
-    lval, rval = line.split(':', 1)
-    num = int(lval.split()[-1])
-    sues.append((num, parse_props(rval)))
+sues = [(int(lval.split()[-1]), parse_sue(rval)) for lval, rval in tabulate(get_input(16), ':', maxsplit=1)]
 
-print('1.', next(num for num, props in sues if all(props[k] == target[k] for k in props)))
-print('2.', next(num for num, props in sues if all(matches(props, target, k) for k in props)))
+print('1.', next(num for num, sue in sues if all(sue[k] == target[k] for k in sue)))
+print('2.', next(num for num, sue in sues if all(matches(sue, target, k) for k in sue)))
