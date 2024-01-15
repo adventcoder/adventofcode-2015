@@ -11,10 +11,11 @@ def subset_sum(nums, target):
         elif n == 0:
             return inf, inf # no subsets found
         else:
-            res = recur(n - 1, s) # subsets without nums[n-1]
+            # subsets without nums[n-1]
+            res = recur(n - 1, s)
             if nums[n - 1] <= s:
-                res2 = add(*recur(n - 1, s - nums[n - 1]), nums[n-1]) # subsets with nums[n-1]
-                res = merge(*res, *res2)
+                # subsets with nums[n-1]
+                res = merge(*res, add(*recur(n - 1, s - nums[n - 1]), nums[n-1]))
             return res
     return recur(len(nums), target)[0]
 
@@ -26,8 +27,8 @@ def merge(entanglement1, size1, entanglement2, size2):
         return entanglement1, size1
     if size2 < size1:
         return entanglement2, size2
-    # min size subset within both sets of subsets are the same so get the minimum entanglement from either set of subsets
-    return min(entanglement1, entanglement2), size1
+    # min size subsets are the same so get the minimum entanglement from either
+    return min(entanglement1, entanglement2), size1 # == size2
 
 nums = list(map(int, get_input(24).splitlines()))
 total = sum(nums)
