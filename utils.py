@@ -8,7 +8,7 @@ def get_input(day):
 def ints(s):
     return map(int, re.findall(r'-?[0-9]+', s))
 
-def tabulate(s, sep=',', end=None, maxsplit=None):
+def tabulate(s, sep=',', end=None, maxsplit=-1):
     lines = s.splitlines() if end is None else s.split(end)
     for line in lines:
         yield line.split(sep, maxsplit=maxsplit)
