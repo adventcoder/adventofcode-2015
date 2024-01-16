@@ -1,11 +1,17 @@
-from utils import get_input, tabulate
+from utils import get_input
 from dataclasses import dataclass, replace
 from math import inf
 
 #TODO: could be cleaned up a bit
 
-boss = { lval: int(rval) for lval, rval in tabulate(get_input(22), ':', maxsplit=1) }
-boss_hp, boss_damage = boss['Hit Points'], boss['Damage']
+def parse_vals(s, labels):
+    vals = [None] * len(labels)
+    for line in s.splitlines():
+        lval, rval = line.split(':')
+        vals[labels.index(lval.strip())] = int(rval)
+    return vals
+
+boss_hp, boss_damage = parse_vals(get_input(22), ['Hit Points', 'Damage'])
 
 def battle(hard):
     states = { State.start(hard): 0 }
