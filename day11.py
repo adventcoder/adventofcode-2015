@@ -1,4 +1,4 @@
-from utils import get_input, slices
+from utils import get_input
 import re
 
 def next_password(pwd):
@@ -17,7 +17,7 @@ def confusing(pwd):
     return any(c in 'iol' for c in pwd)
 
 def straight(pwd):
-    return any(ord(b) == ord(a) + 1 and ord(c) == ord(b) + 1 for a, b, c in slices(pwd, 3, overlap=True))
+    return any(ord(pwd[i]) == ord(pwd[i + 1]) - 1 == ord(pwd[i + 2]) - 2 for i in range(len(pwd) - 2))
 
 def pairs(pwd):
     return len(set(re.findall(r'([a-z])\1', pwd))) >= 2

@@ -8,12 +8,6 @@ def get_input(day):
 def ints(s):
     return map(int, re.findall(r'-?[0-9]+', s))
 
-def slices(s, n, overlap=False, truncate=True):
-    step = 1 if overlap else n
-    stop = len(s) - n + 1 if truncate else len(s)
-    for i in range(0, stop, step):
-        yield s[i : i + n]
-
 @dataclass(frozen=True)
 class Interval:
     min: int
