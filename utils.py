@@ -8,11 +8,6 @@ def get_input(day):
 def ints(s):
     return map(int, re.findall(r'-?[0-9]+', s))
 
-def iterate(f, x):
-    while True:
-        yield x
-        x = f(x)
-
 def slices(s, n, overlap=False, truncate=True):
     step = 1 if overlap else n
     stop = len(s) - n + 1 if truncate else len(s)
