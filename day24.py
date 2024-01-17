@@ -15,7 +15,7 @@ def subset_sum(nums, target):
             res = recur(n - 1, s)
             if nums[n - 1] <= s:
                 # subsets with nums[n-1]
-                res = merge(*res, add(*recur(n - 1, s - nums[n - 1]), nums[n-1]))
+                res = merge(*res, *add(*recur(n - 1, s - nums[n - 1]), nums[n-1]))
             return res
     return recur(len(nums), target)[0]
 
