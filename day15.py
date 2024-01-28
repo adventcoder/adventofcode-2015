@@ -11,7 +11,7 @@ def partitions(n, m):
             for bs in partitions(n - a, m - 1):
                 yield (a, *bs)
 
-#TODO: derive bounds and restrict loop to where score terms are all positive
+#TODO: derive bounds and restrict loop to where score terms are all positive https://en.wikipedia.org/wiki/Fourier%E2%80%93Motzkin_elimination
 
 score1 = 0
 score2 = 0
